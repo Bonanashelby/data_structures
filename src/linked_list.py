@@ -17,28 +17,41 @@ class LinkedList(object):
     def push(self, node_object):
         node_instantiation = Node(node_object, self.head)
         self.head = node_instantiation
+        if linkedlist empty set make the
+        single node both the head and tail
+        find next object and unhead it
+
+
+    def pop(self):
+        node_to_be_removed = self.head
+        starting from tail, if its next node != self.head
+        go to its next node and compare it until
+        next node equals self.head
+        set that node equal to self.head
+        node_to_be_removed = node.next node
+        return node_to_be_removed
 
 
 
-    def __pop__(self):
-        pass
+    def len(self):  # size
+        count = 0
+        starting from self.tail, go to its next_node 
+        add 1 to count, then go to that node's next node
+        until you reach self.head, where None
+        #possible recursion
 
-
-    def __len__(self):
-        pass
-
-
-    def __repr__(self):
-        pass
-
-    def size(self):
-        pass
 
     def search(self, val):
-        pass
+        if val != self.head, go it its node.next_node
+        and run the same comparison
+        until val == node.data
+        else return None
+        # also recursion
 
     def remove(self, node):
-        pass
+        run search and find the value, but remove it
+        if tail, set its next_node to be the tail
+        if head, set its values appropriately
 
     def display(self):
-        pass
+        print(('{},'.format(the_nodes)))

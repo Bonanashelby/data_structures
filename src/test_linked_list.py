@@ -105,11 +105,11 @@ def test_linked_list_remove():
     assert new_list.search(1) == None
     new_list.remove(4)
     assert new_list.search(4) == None
-    assert new_list.search(3) == new_list.head
+    assert new_list.search(3) == new_list.head.data
     new_list.push(5)
     new_list.remove(3)
     assert new_list.search(3) == None
-    assert new_list.search(5) == new_list.head
+    assert new_list.search(5) == new_list.head.data
 
 # @pytest.mark.parametrize('arg, result', PARAMS_TABLE)
 # def test_node_next(arg, result):

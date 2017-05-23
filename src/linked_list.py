@@ -57,11 +57,12 @@ class LinkedList(object):
             print("I'm here")
             print(self.pop())
             print(self.head.data)
+            return None
         current_node = self.head
         print(current_node.next_node.data)
         print(current_node.next_node.next_node.data)
         while current_node != None:
-            if current_node.next_node != val:
+            if current_node.next_node.data != val:
                 print('My value does not equal the current node.')
                 current_node = current_node.next_node
             else:

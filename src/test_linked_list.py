@@ -127,4 +127,8 @@ def test_linked_list_remove():
 #     new_link.push(arg)
 #     assert new_link.head.data == result
 
-
+def test_linked_llist_display():
+    """Our display list."""
+    from linked_list import LinkedList
+    new_list = LinkedList([1, 2, 3, 4])
+    assert new_list.display() == "(4, 3, 2, 1)"

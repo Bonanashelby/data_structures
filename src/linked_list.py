@@ -74,5 +74,13 @@ class LinkedList(object):
                 break
 
 
-    # def display(self):
-    #     print(('{},'.format(the_nodes)))
+    def display(self):
+        node = self.head
+        display_str = ' '
+        while node != None:
+                display_str += ' '
+                display_str += str(node.data)
+                node = node.next_node
+        display_str = ', '.join(display_str.split())
+        print('{}{}{}'.format('(', display_str, ')'))
+        return '{}{}{}'.format('(', display_str, ')')

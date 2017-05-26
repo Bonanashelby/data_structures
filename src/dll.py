@@ -20,27 +20,56 @@ class DoubleLinkedList(object):
     def push(self, val):
         """Push a value to the head of the list."""
         if not val:
-            raise ValueError('Please provide a not null value.')
-        if self.tail == None and self.head == None:
+            raise TypeError('Please provide a not null value.')
+        if self.tail is None and self.head is None:
             new_node = Node(val)
-            self.tail == new_node
-            self.head == new_node
-            self._length += 1
-        else:
-            new_node = Node(val, self.head)
-            self.head.prior_node = new_node
+            self.tail = new_node
             self.head = new_node
             self._length += 1
-        
+        else:
+            new_node = Node(val, None, self.head)
+            self.head.next_node = new_node
+            self.head = new_node
+            self._length += 1
+
+
+    def append(self, val):
+        """Appends a val to the tail of a list."""
+        if not val:
+            raise TypeError('Please provide a not null value.')
+        if self.tail is None and self.head is None:
+            new_node = Node(val)
+            self.tail = new_node
+            self.head = new_node
+            self._length += 1
+        else:
+            new_node = Node(val, self.tail, None)
+            self.tail.prior_node = new_node
+            self.tail = new_node
+            self._length += 1
+
 
     def pop(self):
+        """Pop pops from the head of the list."""
         if not self.head:
             raise IndexError('There\'s nothing to remove from the linked list.')
-        popped = self.head
-        self.head = self.head.next_node
-        popped.next_node = None
         self._length -= 1
+        if self.head == self.tail:
+            last_pop = self.head 
+            self.head = None
+            self.tail = None
+            return last_pop.data 
+        popped = self.head
+        self.head = self.head.prior_node
+        popped.prior_node = None
+        self.head.next_node = None
         return popped.data
+
+
+    def shift():
+        """tail pop."""
+        pass
+
 
     def __len__(self):
         return self._length
@@ -68,12 +97,3 @@ class DoubleLinkedList(object):
                 if removed_node.next_node != None:
                     removed_node.next_node = None
                 break
-
-    def append(self, val):
-        """tail push"""
-        pass
-
-
-    def shift():
-        """tail pop"""
-        pass

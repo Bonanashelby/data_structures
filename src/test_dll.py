@@ -89,3 +89,31 @@ def test_dll_appends_3_values(dll):
     assert dll.head.prior_node.next_node.data == 1
     assert dll.tail.next_node.prior_node.data == 3 
 
+
+def test_dll_shift_Index_Error(dll):
+    """Testing that the Index Error is raised if no val is shifted."""
+    with pytest.raises(IndexError):
+        dll.shift()
+
+
+def test_dll_shift_only_has_one_item(dll):
+    """Testing that shift only has one item and both are head and tail none vals."""
+    dll.push(1)
+    dll.push(2)
+    assert dll.shift() == 1
+    assert dll.head.data == 2
+    assert dll.tail.data == 2
+    assert dll.head.next_node == None
+    assert dll.tail.prior_node == None
+    assert dll.shift() == 2
+    assert dll.head == None
+    assert dll.tail == None
+
+
+def test_dll_remove_Index_Error(dll):
+    """Testing that the Index Error is raised if no val is passed."""
+    dll.push(1)
+    dll.push(2)
+    dll.push(3)
+    with pytest.raises(TypeError):
+        dll.remove()

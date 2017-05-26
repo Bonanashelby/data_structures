@@ -55,10 +55,10 @@ class DoubleLinkedList(object):
             raise IndexError('There\'s nothing to remove from the linked list.')
         self._length -= 1
         if self.head == self.tail:
-            last_pop = self.head 
+            last_pop = self.head
             self.head = None
             self.tail = None
-            return last_pop.data 
+            return last_pop.data
         popped = self.head
         self.head = self.head.prior_node
         popped.prior_node = None
@@ -66,9 +66,21 @@ class DoubleLinkedList(object):
         return popped.data
 
 
-    def shift():
-        """tail pop."""
-        pass
+    def shift(self):
+        """Removes the node from the tail of the list."""
+        if not self.head:
+            raise IndexError('There\'s nothing to remove from the linked list.')
+        self._length -= 1
+        if self.head == self.tail:
+            last_pop = self.head
+            self.head = None
+            self.tail = None
+            return last_pop.data
+        shifted = self.tail
+        self.tail = self.tail.next_node
+        shifted.next_node = None
+        self.tail.prior_node = None
+        return shifted.data
 
 
     def __len__(self):
@@ -77,23 +89,25 @@ class DoubleLinkedList(object):
 
     def remove(self, val):
         if val is None:
-            raise IndexError('That value is not in this particular linked list.')
+            raise TypeError('That value is not in this particular linked list.')
         if self.head.data == val:
-            print("I'm here")
-            print(self.pop())
-            print(self.head.data)
+            self.pop()
+            return None
+        elif self.tail.data == val:
+            self.shift()
             return None
         current_node = self.head
         print(current_node.next_node.data)
         print(current_node.next_node.next_node.data)
-        while current_node != None:
-            if current_node.next_node.data != val:
+        while current_node is not None:
+            if current_node.data != val:
                 print('My value does not equal the current node.')
-                current_node = current_node.next_node
+                current_node = current_node.prior_node
             else:
-                removed_node = current_node.next_node
-                current_node.next_node = current_node.next_node.next_node
+                removed_node = current_node
+                # We are at 109
+                current_node.next_node = current_node.prior
                 self._length -= 1
-                if removed_node.next_node != None:
+                if removed_node.next_node is not None:
                     removed_node.next_node = None
                 break

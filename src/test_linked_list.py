@@ -20,6 +20,7 @@ def test_linked_list_head(linked_list):
 def test_iterable_linked_list():
     """Test values of initialized linked list."""
     from linked_list import LinkedList
+
     linked_list = LinkedList([1, 2, 3])
     assert len(linked_list) == 3
     assert linked_list.head.data == 3
@@ -61,6 +62,13 @@ def test_linked_list_popped_exception(linked_list):
     """Raise exception if empty."""
     with pytest.raises(IndexError):
         linked_list.pop()
+
+
+    new_list = LinkedList([obj_1, obj_2, obj_3])
+    assert new_list.search(45) == obj_2
+    assert new_list.search(['stringy']) == obj_3
+    assert new_list.search(obj_1) == 'apple'
+    assert new_list.search(47) == None
 
 
 def test_linked_list_length(linked_list):

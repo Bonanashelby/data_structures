@@ -13,13 +13,13 @@ def the_stack():
 def test_stack_push(the_stack):
     """Test for pushing to stack."""
     the_stack.push(5)
-    assert the_stack._newLinkedList.head.data == 5
+    assert the_stack._new_linked_list.head.data == 5
 
 
 def test_stack_pop(the_stack):
     """Test for popping to stack."""
     the_stack.pop()
-    assert the_stack._newLinkedList.head.data == 3
+    assert the_stack._new_linked_list.head.data == 3
 
 
 def test_stack_pop_except_error():

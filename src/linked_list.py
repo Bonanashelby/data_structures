@@ -87,5 +87,4 @@ class LinkedList(object):
                 display_str += str(node.data)
                 node = node.next_node
         display_str = ', '.join(display_str.split())
-        print('{}{}{}'.format('(', display_str, ')'))
-
+        return '{}{}{}'.format('(', display_str, ')')

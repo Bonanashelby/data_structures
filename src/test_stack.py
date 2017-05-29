@@ -2,7 +2,6 @@
 import pytest
 
 
-
 @pytest.fixture
 def the_stack():
     """Stack fixture."""

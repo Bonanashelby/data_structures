@@ -26,6 +26,11 @@ def test_iterable_linked_list():
     assert linked_list.head.data == 3
 
 
+    linked_list = LinkedList([1, 2, 3])
+    assert len(linked_list) == 3
+    assert linked_list.head.data == 3
+
+    
 def test_iterable_linked_list_exception():
     """Ensure exception raised if a non-iterable is passed as argument."""
     from linked_list import LinkedList
@@ -64,11 +69,15 @@ def test_linked_list_popped_exception(linked_list):
         linked_list.pop()
 
 
-    new_list = LinkedList([obj_1, obj_2, obj_3])
-    assert new_list.search(45) == obj_2
-    assert new_list.search(['stringy']) == obj_3
-    assert new_list.search(obj_1) == 'apple'
-    assert new_list.search(47) == None
+def test_linked_list_length(linked_list):
+    """Verify we can return the length of the linked list."""
+    linked_list.push(3)
+    linked_list.push(4)
+    assert len(linked_list) == 2
+    linked_list.push(5)
+    assert len(linked_list) == 3
+    linked_list.pop()
+    assert len(linked_list) == 2
 
 
 def test_linked_list_length(linked_list):

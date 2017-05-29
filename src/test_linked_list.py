@@ -20,11 +20,17 @@ def test_linked_list_head(linked_list):
 def test_iterable_linked_list():
     """Test values of initialized linked list."""
     from linked_list import LinkedList
+
     linked_list = LinkedList([1, 2, 3])
     assert len(linked_list) == 3
     assert linked_list.head.data == 3
 
 
+    linked_list = LinkedList([1, 2, 3])
+    assert len(linked_list) == 3
+    assert linked_list.head.data == 3
+
+    
 def test_iterable_linked_list_exception():
     """Ensure exception raised if a non-iterable is passed as argument."""
     from linked_list import LinkedList
@@ -61,6 +67,17 @@ def test_linked_list_popped_exception(linked_list):
     """Raise exception if empty."""
     with pytest.raises(IndexError):
         linked_list.pop()
+
+
+def test_linked_list_length(linked_list):
+    """Verify we can return the length of the linked list."""
+    linked_list.push(3)
+    linked_list.push(4)
+    assert len(linked_list) == 2
+    linked_list.push(5)
+    assert len(linked_list) == 3
+    linked_list.pop()
+    assert len(linked_list) == 2
 
 
 def test_linked_list_length(linked_list):

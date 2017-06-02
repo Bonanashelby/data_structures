@@ -3,12 +3,12 @@ from setuptools import setup
 
 
 extra_packages = {
-    'testing': ['pytest', 'pytest-watch', 'pytest-cov']
+    'testing': ['pytest', 'pytest-watch', 'pytest-cov', 'tox']
 }
 
 
 setup(
-    name="dll",
+    name="Data Structures",
     description="Implements the data structure assignment",
     version=0.1,
     author="Kurt Maurer" "Anna Shelby",

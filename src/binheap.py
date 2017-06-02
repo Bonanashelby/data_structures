@@ -1,33 +1,28 @@
 """Binary Min Heap."""
 
 
-class Node(object):
-    """Node class for use in min heap data structure."""
-
-    def __init__(self, data, next_node=None, prior_node=None):
-        """Initialize a node when adding to the heap."""
-        self.data = data
-        self.next_node = next_node
-        self.prior_node = prior_node
-
-
-class Heap(object):
+class BinHeap(object):
     """Min Heap Data Structure."""
 
-    def __init__(self):
+    def __init__(self, iterable=None):
         """Initialize an empty min heap."""
-        self._length = 0
-        self.parent = None
-        self.left_child = None
-        self.right_child = None
+        iterable = [3, 5, 2, 4, 9, 1, 7, 8, 10, 6]
+        for item in iterable[::-1]:
+            item_index = iterable.index(item)
+            parent = int((item_index - 1) / 2)
+            while item_index > 0:
+                if iterable[item_index] < iterable[parent]:
+                    curr_val = iterable[parent]
+                    iterable[parent] = iterable[item_index]
+                    iterable[item_index] = curr_val
+                    item_index = parent
+                    parent = int((item_index - 1) / 2)
+                else:
+                    break
 
-    # def push(self, val):
-    #     """Push a value to the heap."""
-    #     if not val:
-    #         raise TypeError('Please provide the correct value.')
-    #     self._length += 1 
-    #     if self.parent = None:
-    #         new_node = Node(val)
-    #         self.parent = new_node
-    #     else:
-    #         new_node = Node(val,)
+
+
+    def push(self, val):
+        """Push a value onto the heap."""
+        while i > 0:
+            #move that value up until it is the lesser val.

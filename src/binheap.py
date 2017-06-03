@@ -1,7 +1,5 @@
 """Binary Min Heap."""
 
-#  test iterable = [3, 5, 2, 4, 9, 1, 7, 8, 10, 6]
-
 
 class BinHeap(object):
     """Min Heap Data Structure."""

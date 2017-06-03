@@ -13,7 +13,6 @@ class BinHeap(object):
 
     def heapify(self, iterable):
         """Function that will be used in init and other methods."""
-        # heap_list = list(set(iterable))
         heap_list = iterable
         for item in heap_list[::-1]:
             item_index = heap_list.index(item)

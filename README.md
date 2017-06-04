@@ -27,3 +27,10 @@ Data Structures for Python 401
 #Implement a enqueue(), dequeue(), peek(), size() function for this exercise. 
 #Worked on enqueue and dequeue with our double linked list methods.
 #Used the shift and pop methods from our double linked list in dll.py.
+
+
+##Binary Heap Branch
+#Implement a pop() and push() function for this exercise.
+#Worked on initialization and implementation of our the data structure itself.
+#Ended up taking init logic into its own function to be used after each initialization, pop, and push.
+#Tests prove functionality of the heapify method by always returning the smallest value at the same index (index 0).

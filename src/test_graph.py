@@ -52,7 +52,9 @@ def test_graph_init_success(new_graph):
 
 def test_graph_adds_and_lists_nodes(graph_no_edges):
     """Ensure we get list of nodes."""
-    assert graph_no_edges.nodes() == ['Grapefruit', 82, 99, 'Luftballons']
+    listy = ['Grapefruit', 82, 99, 'Luftballons']
+    for node in listy:
+        assert node in graph_no_edges.nodes()
 
 
 def test_wont_add_edges_to_empty_graph(new_graph):
@@ -72,16 +74,16 @@ def test_graph_lists_adds_and_lists_edges(graph_no_edges):
     """Ensure we add edges to the nodes."""
     graph_no_edges.add_edge(82, 34)
     graph_no_edges.add_edge(99, 'Luftballons')
-    assert graph_no_edges.edges() == [(82, 34), (99, 'Luftballons')]
+    assert (82, 34) in graph_no_edges.edges()
+    assert (99, 'Luftballons') in graph_no_edges.edges()
 
 
 def test_graph_deletes_nodes(graph_with_edges):
     """Ensure we can delete a node."""
     graph_with_edges.del_nodes('Grapefruit')
-    assert graph_with_edges.nodes() == [
-        82,
-        99,
-        'Luftballons']
+    listy = [82, 99, 'Luftballons']
+    for node in listy:
+        assert node in graph_with_edges.nodes()
 
 
 def test_graph_cant_delete_an_unpresent_node(graph_no_edges):

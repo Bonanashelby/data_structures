@@ -37,19 +37,19 @@ def priority_queue_full():
 def test_priority_que_init():
     """Make sure they don't provide any arguments."""
     from priorityq import PriorityQueue
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         new_pqueue = PriorityQueue(1)
 
 
-def test_priority_que_type_arguments_0(priority_queue):
-    """Make sure they only give priority >= 1."""
+def test_priority_que_type_arguments_negative(priority_queue):
+    """Make sure they cannot give priority <= 1."""
     with pytest.raises(ValueError):
-        priority_queue.insert(3, 0)
+        priority_queue.insert(3, -99)
 
 
 def test_priority_que_type_arguments_a(priority_queue):
     """Make sure they only give priority >= 1."""
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         priority_queue.insert(3, 'a')
 
 
@@ -61,7 +61,7 @@ def test_priority_que_type_arguments_negative(priority_queue):
 
 def test_priority_que_type_arguments_none(priority_queue):
     """Make sure an argument is give."""
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         priority_queue.insert()
 
 
@@ -79,7 +79,7 @@ def test_priority_que_type_arguments_list(priority_queue):
 
 def test_priority_que_type_arguments_float(priority_queue):
     """For now, ensure data type is integer."""
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         priority_queue.insert(1.5, 3)
 
 
@@ -87,13 +87,13 @@ def test_priority_que_success(priority_queue):
     """Ensure it takes the correct arguments."""
     priority_queue.insert(15)
     assert list(priority_queue._heap[0].keys())[0] == 15
-    assert list(priority_queue._heap[0].values())[0] is None
+    assert list(priority_queue._heap[0].values())[0] == 0
 
 
 def test_priority_que_success_multiple(priority_queue_full):
     """Ensure it takes the correct arguments."""
-    assert list(priority_queue._heap[0].keys())[0] == 11
-    assert list(priority_queue._heap[-1].values())[0] == 17
+    assert list(priority_queue_full._heap[0].keys())[0] == 11
+    assert list(priority_queue_full._heap[-1].keys())[0] == 3
 
 
 # def test_priority_que_success_multiple(priority_queue):

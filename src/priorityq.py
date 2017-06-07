@@ -26,7 +26,7 @@ class PriorityQueue(object):
                         parent = (item_index - 1) // 2
                     else:
                         item_index = parent
-                        parent = (item_index -1) // 2
+                        parent = (item_index - 1) // 2
                 elif list(heap_list[parent].values())[0] > 0 and list(heap_list[item_index].values())[0] is 0:
                     item_index = parent
                     parent = (item_index - 1) // 2

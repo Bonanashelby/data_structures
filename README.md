@@ -34,3 +34,14 @@ Data Structures for Python 401
 #Worked on initialization and implementation of our the data structure itself.
 #Ended up taking init logic into its own function to be used after each initialization, pop, and push.
 #Tests prove functionality of the heapify method by always returning the smallest value at the same index (index 0).
+
+
+#Priority Queue Branch
+#Implement a pop(), peek(), insert(value) for this exercise.
+#Worked on tests.
+
+
+#Graph Branch
+#Implement a nodes(), edges(), add_node(), add_edge(), del_nodes(), del_edges(), has_node(), neighbors(), adjacent().
+#Drove TDD by writing tests before implementing the graph. Discovered we had to make changes to the tests as we pivoted our approach to various methods.
+#All tests pass.

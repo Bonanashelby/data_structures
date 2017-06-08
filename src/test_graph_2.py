@@ -23,7 +23,7 @@ def graph():
     return new_graph
 
 
-def test_start_at_a(graph,):
+def test_start_at_a(graph):
     """Ensure we get a list of stuff starting at a."""
     from graph_2 import depth_first_traversal
     assert depth_first_traversal(graph, 'A') == ['A', 'B', 'D', 'E', 'C', 'F']

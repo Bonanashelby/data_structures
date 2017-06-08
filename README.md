@@ -46,3 +46,7 @@ Data Structures for Python 401
 #Drove TDD by writing tests before implementing the graph. Discovered we had to make changes to the tests as we pivoted our approach to various methods.
 #All tests pass.
 
+
+#Graph Traversal Branch
+#Implement a breadth_first and depth_first traversal for our graph data structure.
+#All tests pass, the stack and the queue were instrumental in making the traversals work.

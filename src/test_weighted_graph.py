@@ -36,11 +36,13 @@ def graph_with_edges():
     new_graph.add_node('D')
     new_graph.add_node('E')
     new_graph.add_node('F')
-    new_graph.add_edge('A', 'B', 7)
-    new_graph.add_edge('A', 'C', 9)
-    new_graph.add_edge('B', 'D', 2)
-    new_graph.add_edge('B', 'E', 4)
-    new_graph.add_edge('C', 'F', 6)
+    new_graph.add_edge('A', 'B')
+    new_graph.add_edge('A', 'C')
+    new_graph.add_edge('B', 'D')
+    new_graph.add_edge('B', 'E')
+    new_graph.add_edge('C', 'B')
+    new_graph.add_edge('F', 'A')
+    new_graph.add_edge('C', 'F')
     return new_graph
 
 

@@ -3,6 +3,25 @@
 #  [{1: 0}, {100: 1}, {33: 2}, {44: 3}, {2: 0}]
 
 
+    # def heapify(self, iterable):
+    #     """Function that will be used in init and other methods."""
+    #     heap_list = iterable
+    #     for item in heap_list[::-1]:
+    #         item_index = heap_list.index(item)
+    #         parent = (item_index - 1) // 2
+    #         while item_index > 0:
+                    
+        #             if list(heap_list[parent].values())[0] < list(heap_list[parent].values())[0]:
+        #                 curr_val = heap_list[parent]
+        #                 heap_list[parent] = heap_list[item_index]
+        #                 heap_list[item_index] = curr_val
+        #                 item_index = parent
+        #                 parent = (item_index - 1) // 2
+        #             else:
+        #                 break
+    #     return heap_list
+
+
 class PriorityQueue(object):
     """Implement a priority queue."""
 

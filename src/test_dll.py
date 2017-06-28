@@ -16,12 +16,6 @@ def test_dll_initialization(dll):
     assert dll.head is None
 
 
-def test_dll_push_raises_type_error(dll):
-    """Test that the value error  is raised."""
-    with pytest.raises(TypeError):
-        dll.push()
-
-
 def test_dll_push_pushes_value(dll):
     """Test that the push pushes a value to head of list."""
     dll.push(1)
@@ -69,17 +63,10 @@ def test_dll_pop_only_has_one_item(dll):
     assert dll.tail is None
 
 
-def test_dll_append_raises_type_error(dll):
-    """Test that we get a type error."""
-    with pytest.raises(TypeError):
-        dll.append()
-
-
 def test_dll_appends_a_value(dll):
     """Ensure tail and head are the same."""
     dll.append(1)
-    assert dll.tail.data == 1
-    assert dll.head.data == 1
+    assert dll.tail.data == dll.head.data == 1
 
 
 def test_dll_appends_3_values(dll):
@@ -113,17 +100,7 @@ def test_dll_shift_only_has_one_item(dll):
     assert dll.head.next_node is None
     assert dll.tail.prior_node is None
     assert dll.shift() == 2
-    assert dll.head is None
-    assert dll.tail is None
-
-
-def test_dll_remove_index_error(dll):
-    """Testing that the Index Error is raised if no val is passed."""
-    dll.push(1)
-    dll.push(2)
-    dll.push(3)
-    with pytest.raises(TypeError):
-        dll.remove()
+    assert dll.head is dll.tail is None
 
 
 def test_dll_remove(dll):
@@ -133,35 +110,28 @@ def test_dll_remove(dll):
     dll.push(3)
     dll.push(4)
     dll.remove(3)
-    assert dll.head.prior_node.data == 2
-    assert dll.head.prior_node.next_node.data == 4
+    assert (dll.head.prior_node.data,
+            dll.head.prior_node.next_node.data) == (2, 4)
     dll.remove(1)
     assert dll.tail.data == 2
     assert dll.tail.next_node.data == 4
     dll.remove(4)
-    assert dll.head.data == 2
-    assert dll.tail.data == 2
+    assert dll.head.data == dll.tail.data == 2
 
 
 def test_dll_len(dll):
     """Test to make sure we get the right number of nodes."""
-    assert len(dll) == 0
+    dll_lengths = []
     dll.push(1)
-    assert len(dll) == 1
     dll.push(2)
-    assert len(dll) == 2
     dll.append(3)
-    assert len(dll) == 3
     dll.push(4)
-    assert len(dll) == 4
     dll.push(5)
-    assert len(dll) == 5
     dll.push(6)
+    dll_lengths.append(len(dll))
     dll.remove(4)
-    assert len(dll) == 5
     dll.pop()
-    assert len(dll) == 4
     dll.shift()
-    assert len(dll) == 3
     dll.pop()
-    assert len(dll) == 2
+    dll_lengths.append(len(dll))
+    assert dll_lengths == [5, 2]

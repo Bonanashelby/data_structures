@@ -24,29 +24,27 @@ class DoubleLinkedList(object):
         """Push a value to the head of the list."""
         if not val:
             raise TypeError('Please provide a not null value.')
-        self._length += 1
         if self.tail is None and self.head is None:
             new_node = Node(val)
-            self.tail = new_node
-            self.head = new_node
+            self.tail = self.head = new_node
         else:
             new_node = Node(val, None, self.head)
             self.head.next_node = new_node
             self.head = new_node
+        self._length += 1
 
     def append(self, val):
         """Append a val to the tail of a list."""
         if not val:
             raise TypeError('Please provide a not null value.')
-        self._length += 1
         if self.tail is None and self.head is None:
             new_node = Node(val)
-            self.tail = new_node
-            self.head = new_node
+            self.tail = self.head = new_node
         else:
             new_node = Node(val, self.tail, None)
             self.tail.prior_node = new_node
             self.tail = new_node
+        self._length += 1
 
     def pop(self):
         """Pop pops from the head of the list."""
@@ -56,29 +54,25 @@ class DoubleLinkedList(object):
         self._length -= 1
         if self.head == self.tail:
             last_pop = self.head
-            self.head = None
-            self.tail = None
+            self.tail = self.head = None
             return last_pop.data
         popped = self.head
         self.head = self.head.prior_node
-        popped.prior_node = None
         self.head.next_node = None
         return popped.data
 
     def shift(self):
         """Remove the node from the tail of the list."""
-        if not self.head:
+        if not self.tail:
             raise IndexError(
                 'There\'s nothing to remove from the linked list.')
         self._length -= 1
         if self.head == self.tail:
             last_pop = self.head
-            self.head = None
-            self.tail = None
+            self.tail = self.head = None
             return last_pop.data
         shifted = self.tail
         self.tail = self.tail.next_node
-        shifted.next_node = None
         self.tail.prior_node = None
         return shifted.data
 
@@ -88,13 +82,12 @@ class DoubleLinkedList(object):
 
     def remove(self, val):
         """Remove a node with the value provided."""
-        if val is None:
-            raise TypeError(
-                'That value is not in this particular linked list.')
         if self.head.data == val:
             self.pop()
+            return
         elif self.tail.data == val:
             self.shift()
+            return
         current_node = self.head
         while current_node is not None:
             if current_node.data != val:
@@ -102,9 +95,7 @@ class DoubleLinkedList(object):
             else:
                 new_next_node = current_node.next_node
                 new_prior_node = current_node.prior_node
-                current_node.next_node.prior_node = new_prior_node
-                current_node.prior_node.next_node = new_next_node
-                current_node.next_node = None
-                current_node.prior_node = None
+                new_next_node.next_node.prior_node = new_prior_node
+                new_prior_node.prior_node.next_node = new_next_node
                 self._length -= 1
                 break

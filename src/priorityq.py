@@ -37,15 +37,8 @@ class PriorityQueue(object):
             parent = (item_index - 1) // 2
             while item_index > 0:
                 if list(heap_list[parent].values())[0] is 0 and list(heap_list[item_index].values())[0] is 0:
-                    if list(heap_list[item_index].keys())[0] < list(heap_list[parent].keys())[0]:
-                        curr_val = heap_list[parent]
-                        heap_list[parent] = heap_list[item_index]
-                        heap_list[item_index] = curr_val
-                        item_index = parent
-                        parent = (item_index - 1) // 2
-                    else:
-                        item_index = parent
-                        parent = (item_index - 1) // 2
+                    item_index = parent
+                    parent = (item_index - 1) // 2
                 elif list(heap_list[parent].values())[0] > 0 and list(heap_list[item_index].values())[0] is 0:
                     item_index = parent
                     parent = (item_index - 1) // 2
@@ -71,8 +64,8 @@ class PriorityQueue(object):
 
     def insert(self, value, priority=0):
         """Insert a value into the priority queue with an optional priority."""
-        if not isinstance(value, int) or not isinstance(priority, int):
-            raise TypeError("Must provide an integer for value and priority.")
+        if not isinstance(priority, int):
+            raise TypeError("Must provide an integer for priority.")
         if priority < 0:
             raise ValueError("You may not use a negative priority. Priority must be 0 or greater.")
         self._heap.append({value: priority})

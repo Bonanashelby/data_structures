@@ -1,8 +1,9 @@
 [run]
 source = 
-    src/weighted_graph.py
+    src/weighted_traversal.py
     
 omit = 
+    src/weighted_graph.py
     src/priorityq.py
     src/deque.py
     src/que_.py
@@ -27,6 +28,6 @@ omit =
     src/test_stack.py
     src/test_weighted_graph.py
     src/test_weighted_traversal.py
-    src/weighted_traversal.py
+
 [report]
 show_missing = True

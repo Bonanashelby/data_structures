@@ -32,7 +32,7 @@ def breadth_first_traversal(graph, start):
     peeped = []
     queue = Queue()
     queue.enqueue(start)
-    while len(queue) > 0:
+    while queue.size() > 0:
         node = queue.dequeue()
         if node not in peeped:
             peeped.append(node)
@@ -42,7 +42,7 @@ def breadth_first_traversal(graph, start):
     return peeped
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma no cover
     new_graph = Weighted()
     new_graph.add_node('A')
     new_graph.add_node('B')

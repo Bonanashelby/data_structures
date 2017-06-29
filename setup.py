@@ -14,12 +14,6 @@ setup(
     author="Kurt Maurer" "Anna Shelby",
     author_email="bonanashelby@gmail.com",
     license="MIT",
-    py_modules=["server, client"],
-    package_dir={'': 'src'},
     install_requires=["ipython", "pytest"],
-    extras_require=extra_packages,
-    entry_points={
-        'console_scripts': [
-        ]
-    }
+    extras_require=extra_packages
 )

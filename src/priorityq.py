@@ -7,6 +7,7 @@ class PriorityQueue(object):
     def __init__(self):
         """Initialize our priority queue."""
         self._heap = []
+        self._length = 0
 
     def heapify(self, iterable):
         """Function to heapify our dictionary in self._heap."""
@@ -48,13 +49,19 @@ class PriorityQueue(object):
         self._heap.append({value: priority})
         if len(self._heap) > 1:
             self._heap = self.heapify(self._heap)
+        self._length += 1
 
     def pop(self):
         """Pop function for removing highest priority item from queue."""
         pop_it = self._heap.pop(0)
         self.heapify(self._heap)
+        self._length -= 1
         return list(pop_it.keys())[0]
 
     def peek(self):
         """Return the highest priority item without removing from queue."""
         return list(self._heap[0].keys())[0]
+
+    def size(self):
+        """Return the size of our priority queue."""
+        return self._length

@@ -173,3 +173,36 @@ def test_neighbors_value_error_not_in_graph(graph_with_edges):
         """Ensure the value error raises if no neighbors."""
         with pytest.raises(ValueError):
             graph_with_edges.neighbors('G')
+
+
+@pytest.fixture
+def dijkstra_alg():
+    """Test dijkstra method."""
+    from weighted_graph import Weighted
+    new_graph = Weighted()
+    new_graph.add_node('0')
+    new_graph.add_node('1')
+    new_graph.add_node('2')
+    new_graph.add_node('3')
+    new_graph.add_node('4')
+    new_graph.add_node('5')
+    new_graph.add_edge('0','1',1)
+    new_graph.add_edge('0', '2', 7)
+    new_graph.add_edge('1', '3', 9)
+    new_graph.add_edge('1', '5', 15)
+    new_graph.add_edge('2', '4', 4)
+    new_graph.add_edge('3', '5', 5)
+    new_graph.add_edge('3', '4', 10)
+    new_graph.add_edge('4', '5', 3)
+    return new_graph
+
+
+def test_new_graph_returns_path_to_nodes(dijkstra_alg):
+    """Test that the key value pairs are correct."""
+    assert dijkstra_alg.dijkstra('0') == {'1': 1, '2': 7, '3': 10, '4': 11, '5': 14}
+
+
+def test_dijkstra_indext_error_raises(dijkstra_alg):
+    """Ensure that index error raises for no node in graph."""
+    with pytest.raises(IndexError):
+        dijkstra_alg.dijkstra('7')

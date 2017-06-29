@@ -1,9 +1,9 @@
 [run]
 source = 
+    src/weighted_graph.py
     src/weighted_traversal.py
     
 omit = 
-    src/weighted_graph.py
     src/priorityq.py
     src/deque.py
     src/que_.py

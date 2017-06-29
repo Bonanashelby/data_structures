@@ -76,9 +76,9 @@ def test_the_appendleft(the_deque):
     assert the_deque._new_dll.tail.data == 2
 
 
-def test_the_deque_len(the_deque):
+def test_the_deque_size(the_deque):
     """Test the length on the queue."""
     the_deque.append(1)
     the_deque.append(2)
     the_deque.append(3)
-    assert len(the_deque) == 3
+    assert the_deque.size() == 3

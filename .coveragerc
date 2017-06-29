@@ -1,10 +1,10 @@
 [run]
 source = 
-    src/stack.py
+    src/deque.py
 omit = 
     src/que_.py
+    src/stack.py
     src/binheap.py
-    src/deque.py
     src/dijkstra.py
     src/graph_1.py
     src/graph_2.py

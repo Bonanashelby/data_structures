@@ -33,6 +33,6 @@ class Deque(object):
         """Return a new value from the left without dequeing it."""
         print(self._new_dll.tail.data)
 
-    def __len__(self):
+    def size(self):
         """Length function for the queue."""
-        return len(self._new_dll)
+        return self._new_dll.size()

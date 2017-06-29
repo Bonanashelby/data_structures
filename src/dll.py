@@ -95,7 +95,7 @@ class DoubleLinkedList(object):
             else:
                 new_next_node = current_node.next_node
                 new_prior_node = current_node.prior_node
-                new_next_node.next_node.prior_node = new_prior_node
-                new_prior_node.prior_node.next_node = new_next_node
+                new_next_node.prior_node = new_prior_node
+                new_prior_node.next_node = new_next_node
                 self._length -= 1
                 break

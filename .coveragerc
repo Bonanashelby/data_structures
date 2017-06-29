@@ -1,6 +1,6 @@
 [run]
 source = 
-    src/dll.py
+    src/que_.py
 omit = 
     src/binheap.py
     src/deque.py
@@ -9,7 +9,7 @@ omit =
     src/graph_2.py
     src/linked_list.py
     src/priorityq.py
-    src/que_.py
+    src/dll.py
     src/reverse_linked_list.py
     src/stack.py
     src/test_dll.py

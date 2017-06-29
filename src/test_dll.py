@@ -130,7 +130,7 @@ def test_dll_remove_phase_three(dll):
     assert dll.head.data == dll.tail.data == 2
 
 
-def test_dll_len(dll):
+def test_dll_size(dll):
     """Test to make sure we get the right number of nodes."""
     dll_lengths = []
     dll.push(1)
@@ -139,10 +139,10 @@ def test_dll_len(dll):
     dll.push(4)
     dll.push(5)
     dll.push(6)
-    dll_lengths.append(len(dll))
+    dll_lengths.append(dll.size())
     dll.remove(4)
     dll.pop()
     dll.shift()
     dll.pop()
-    dll_lengths.append(len(dll))
+    dll_lengths.append(dll.size())
     assert dll_lengths == [6, 2]

@@ -76,7 +76,7 @@ class DoubleLinkedList(object):
         self.tail.prior_node = None
         return shifted.data
 
-    def __len__(self):
+    def size(self):
         """Return the length of the double linked list."""
         return self._length
 

@@ -32,7 +32,7 @@ def breadth_first_traversal(graph, start):
     peeped = []
     queue = Queue()
     queue.enqueue(start)
-    while len(queue) > 0:
+    while queue.size() > 0:
         node = queue.dequeue()
         if node not in peeped:
             peeped.append(node)
@@ -42,7 +42,7 @@ def breadth_first_traversal(graph, start):
     return peeped
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma no cover
     new_graph = Graph()
     new_graph.add_node('A')
     new_graph.add_node('B')
@@ -58,11 +58,10 @@ if __name__ == '__main__':
     new_graph.add_edge('F', 'A')
     new_graph.add_edge('C', 'F')
 
-
-print(new_graph._graph)
-print('depth_first_traversal():')
-print('(A*)->(B*)->(D*)->(B)->(E*)->(B)->(A)->(C*)->(F*)')
-print(depth_first_traversal(new_graph, 'A'))
-print('breadth_first_traversal():')
-print('(A*)->(B*)->(C*)->(D*)->(E*)->(F*)')
-print(breadth_first_traversal(new_graph, 'A'))
+    print(new_graph._graph)
+    print('depth_first_traversal():')
+    print('(A*)->(B*)->(D*)->(B)->(E*)->(B)->(A)->(C*)->(F*)')
+    print(depth_first_traversal(new_graph, 'A'))
+    print('breadth_first_traversal():')
+    print('(A*)->(B*)->(C*)->(D*)->(E*)->(F*)')
+    print(breadth_first_traversal(new_graph, 'A'))

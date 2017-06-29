@@ -73,3 +73,17 @@ def test_breadth_only_rejects_nonexistent_node():
     from graph_2 import breadth_first_traversal
     with pytest.raises(TypeError):
         breadth_first_traversal(graph, 'Z')
+
+
+def test_depth_first_traversal_keyerror(graph):
+    """Enusre the key error throws for no node in graph."""
+    from graph_2 import depth_first_traversal
+    with pytest.raises(KeyError):
+        depth_first_traversal(graph, 'K')
+
+
+def test_breadth_first_traversal_keyerror(graph):
+    """Ensure the key errors throw for no node in graph."""
+    from graph_2 import breadth_first_traversal
+    with pytest.raises(KeyError):
+        breadth_first_traversal(graph, 'K')

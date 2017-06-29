@@ -32,7 +32,7 @@ def breadth_first_traversal(graph, start):
     peeped = []
     queue = Queue()
     queue.enqueue(start)
-    while len(queue) > 0:
+    while queue.size() > 0:
         node = queue.dequeue()
         if node not in peeped:
             peeped.append(node)

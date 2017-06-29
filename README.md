@@ -29,6 +29,11 @@ Data Structures for Python 401
 #Used the shift and pop methods from our double linked list in dll.py.
 
 
+##Deque Branch
+#Implement a dequeue data structure that has pop, popleft, append, appendleft,
+#peek, peekleft, and size methods. Implemented using a composition of double linked
+#list.
+
 ##Binary Heap Branch
 #Implement a pop() and push() function for this exercise.
 #Worked on initialization and implementation of our the data structure itself.

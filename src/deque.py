@@ -25,13 +25,13 @@ class Deque(object):
         """Shift for popleft."""
         return self._new_dll.shift()
 
-    def peek(self):  # pragma no cover
+    def peek(self):
         """Return a new value without dequeuing it."""
-        print(self._new_dll.head.data)
+        return self._new_dll.head.data
 
-    def peekleft(self):  # pragma no cover
+    def peekleft(self):
         """Return a new value from the left without dequeing it."""
-        print(self._new_dll.tail.data)
+        return self._new_dll.tail.data
 
     def size(self):
         """Length function for the queue."""

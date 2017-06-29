@@ -41,19 +41,38 @@ def test_the_deque_popleft_raises_exception(the_deque):
         the_deque.popleft()
 
 
-def test_the_deque_popleft_multi_values(the_deque):
+def test_the_deque_popleft_multi_values_phase_1(the_deque):
     """Test for popleft on mulitple values."""
     the_deque.append(2)
     assert the_deque._new_dll.tail.data == 2
+
+
+def test_the_deque_popleft_multi_values_phase_2(the_deque):
+    """Test for popleft on mulitple values."""
+    the_deque.append(2)
     the_deque.append(3)
     assert the_deque._new_dll.tail.next_node.data == 3
+
+
+def test_the_deque_popleft_multi_values_phase_3(the_deque):
+    """Test for popleft on mulitple values."""
+    the_deque.append(2)
+    the_deque.append(3)
     the_deque.append(4)
     the_deque.append(5)
     assert the_deque._new_dll.head.data == 5
+
+
+def test_the_deque_popleft_multi_values_phase_4(the_deque):
+    """Test for popleft on mulitple values."""
+    the_deque.append(2)
+    the_deque.append(3)
+    the_deque.append(4)
+    the_deque.append(5)
     the_deque.popleft()
     assert the_deque._new_dll.tail.data == 3
-    assert the_deque.popleft() == 3
-    assert the_deque._new_dll.tail.data == 4
+    assert (the_deque.popleft(),
+            the_deque._new_dll.tail.data) == (3, 4)
 
 
 def test_the_pop(the_deque):
@@ -82,3 +101,21 @@ def test_the_deque_size(the_deque):
     the_deque.append(2)
     the_deque.append(3)
     assert the_deque.size() == 3
+
+
+def test_deque_peek(the_deque):
+    """Test that we get the right value for peek."""
+    the_deque.append(1)
+    the_deque.append(2)
+    the_deque.append(3)
+    the_deque.appendleft('tables')
+    assert the_deque.peek() == 3
+
+
+def test_deque_peekleft(the_deque):
+    """Test that we get the right value for peek."""
+    the_deque.append(1)
+    the_deque.append(2)
+    the_deque.append(3)
+    the_deque.appendleft('tables')
+    assert the_deque.peekleft() == 'tables'

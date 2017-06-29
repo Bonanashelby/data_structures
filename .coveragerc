@@ -1,13 +1,13 @@
 [run]
 source = 
-    src/que_.py
+    src/linked_list.py
 omit = 
+    src/que_.py
     src/binheap.py
     src/deque.py
     src/dijkstra.py
     src/graph_1.py
     src/graph_2.py
-    src/linked_list.py
     src/priorityq.py
     src/dll.py
     src/reverse_linked_list.py

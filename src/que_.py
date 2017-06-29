@@ -23,6 +23,6 @@ class Queue(object):
         """Return a new value without dequeuing it."""
         print(self._new_dll.tail.data)
 
-    def __len__(self):
+    def size(self):
         """Length function for the queue."""
-        return len(self._new_dll)
+        return self._new_dll.size()

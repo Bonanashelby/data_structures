@@ -36,13 +36,11 @@ def graph_with_edges():
     new_graph.add_node('D')
     new_graph.add_node('E')
     new_graph.add_node('F')
-    new_graph.add_edge('A', 'B')
-    new_graph.add_edge('A', 'C')
-    new_graph.add_edge('B', 'D')
-    new_graph.add_edge('B', 'E')
-    new_graph.add_edge('C', 'B')
-    new_graph.add_edge('F', 'A')
-    new_graph.add_edge('C', 'F')
+    new_graph.add_edge('A', 'B', 7)
+    new_graph.add_edge('A', 'C', 9)
+    new_graph.add_edge('B', 'D', 2)
+    new_graph.add_edge('B', 'E', 4)
+    new_graph.add_edge('C', 'F', 6)
     return new_graph
 
 
@@ -157,3 +155,21 @@ def test_adjacent_unpresent(graph_with_edges):
     """Ensure we get an error."""
     with pytest.raises(ValueError):
         graph_with_edges.adjacent('Captain Picard', 'Star Wars')
+
+
+def test_add_node_value_error_val_exists(graph_no_edges):
+    """Ensure a value is not added twice."""
+    with pytest.raises(ValueError):
+        graph_no_edges.add_node('BB')
+
+
+def test_del_edges_has_no_edges_to_delete(graph_with_edges):
+    """Ensure there are no edges to delete."""
+    with pytest.raises(KeyError):
+        graph_with_edges.del_edges('F', 'G')
+
+
+def test_neighbors_value_error_not_in_graph(graph_with_edges):
+        """Ensure the value error raises if no neighbors."""
+        with pytest.raises(ValueError):
+            graph_with_edges.neighbors('G')

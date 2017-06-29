@@ -13,8 +13,7 @@ def the_queue():
 def test_the_queue_enqueue(the_queue):
     """Test for enqueuing to the queue."""
     the_queue.enqueue(2)
-    assert the_queue._new_dll.head.data == 2
-    assert the_queue._new_dll.tail.data == 2
+    assert the_queue._new_dll.head.data == the_queue._new_dll.tail.data == 2
 
 
 def test_the_queue_enqueue_multi_values(the_queue):
@@ -23,10 +22,10 @@ def test_the_queue_enqueue_multi_values(the_queue):
     the_queue.enqueue(3)
     the_queue.enqueue(4)
     the_queue.enqueue(5)
-    assert the_queue._new_dll.head.data == 5
-    assert the_queue._new_dll.tail.data == 2
-    assert the_queue._new_dll.head.prior_node.data == 4
-    assert the_queue._new_dll.tail.next_node.data == 3
+    assert (the_queue._new_dll.head.data,
+            the_queue._new_dll.tail.data,
+            the_queue._new_dll.head.prior_node.data,
+            the_queue._new_dll.tail.next_node.data) == (5, 2, 4, 3)
 
 
 def test_the_queue_dequeue(the_queue):
@@ -41,19 +40,25 @@ def test_the_queue_dequeue_raises_exception(the_queue):
         the_queue.dequeue()
 
 
-def test_the_queue_dequeue_multi_values(the_queue):
+def test_the_queue_dequeue_multi_values_phase_one(the_queue):
     """Test for dequeue on mulitple values."""
     the_queue.enqueue(2)
-    assert the_queue._new_dll.tail.data == 2
     the_queue.enqueue(3)
-    assert the_queue._new_dll.tail.next_node.data == 3
     the_queue.enqueue(4)
     the_queue.enqueue(5)
-    assert the_queue._new_dll.head.data == 5
     the_queue.dequeue()
     assert the_queue._new_dll.tail.data == 3
-    assert the_queue.dequeue() == 3
-    assert the_queue._new_dll.tail.data == 4
+
+
+def test_the_queue_dequeue_multi_values_phase_two(the_queue):
+    """Test for dequeue on mulitple values."""
+    the_queue.enqueue(2)
+    the_queue.enqueue(3)
+    the_queue.enqueue(4)
+    the_queue.enqueue(5)
+    the_queue.dequeue()
+    assert (the_queue.dequeue(),
+            the_queue._new_dll.tail.data) == (3, 4)
 
 
 def test_the_peek(the_queue):
@@ -61,25 +66,18 @@ def test_the_peek(the_queue):
     the_queue.enqueue(1)
     the_queue.enqueue(2)
     the_queue.enqueue(3)
-    assert the_queue._new_dll.tail.data == 1
     the_queue.dequeue()
     assert the_queue._new_dll.tail.data == 2
 
 
-def test_the_queue_len(the_queue):
+def test_the_queue_size(the_queue):
     """Test the length on the queue."""
     the_queue.enqueue(1)
     the_queue.enqueue(2)
     the_queue.enqueue(3)
-    assert len(the_queue) == 3
+    assert the_queue.size() == 3
 
 
-
-
-
-
-
-
-
-
-
+def test_size_empty(the_queue):
+    """Test zero is returned if empty."""
+    assert the_queue.size() == 0

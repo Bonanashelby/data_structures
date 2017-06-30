@@ -117,3 +117,13 @@ def test_priority_que_pop_and_push(priority_queue_full):
     priority_queue_full.pop()
     priority_queue_full.insert(10, 1)
     assert priority_queue_full.peek() == 10
+
+
+def test_priority_que_size_pop_and_push(priority_queue_full):
+    """Ensure successful interaction between pop and push."""
+    priority_queue_full.pop()
+    priority_queue_full.insert(11, 1)
+    priority_queue_full.pop()
+    priority_queue_full.pop()
+    priority_queue_full.insert(10, 1)
+    assert priority_queue_full.size() == 5

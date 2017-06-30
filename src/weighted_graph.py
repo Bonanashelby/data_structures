@@ -62,7 +62,7 @@ class Weighted(dict):
             raise ValueError("The values are not in the graph.")
         return val2 in self[val1]
 
-    # {('A', 0): 0} -> ('A', 0) -> ('A') -> {'B': 7, 'C': 9}
+    # (('A', 0), 0) -> ('A', 0) -> ('A') -> {'B': 7, 'C': 9}
     def dijkstra(self, start_node):
         """Find the shortest path to nodes from starting node."""
         if not self.has_node(start_node):

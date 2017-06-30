@@ -1,14 +1,13 @@
 [run]
 source = 
-    src/priorityq.py 
-omit = 
     src/weighted_graph.py
+omit = 
+    src/priorityq.py 
     src/weighted_traversal.py
     src/deque.py
     src/que_.py
     src/stack.py
     src/binheap.py
-    src/dijkstra.py
     src/graph_1.py
     src/graph_2.py
     src/dll.py

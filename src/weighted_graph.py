@@ -79,7 +79,9 @@ class Weighted(dict):
                 priorityq.insert(
                     (key, distance_from_start_node), distance_from_start_node
                 )
-                if key in visited and distance_from_start_node > visited[key]:
-                    continue
-                visited.update({key: distance_from_start_node})
+                if key not in visited or distance_from_start_node < visited[key]:
+                    visited.update({key: distance_from_start_node})
         return visited
+
+#  if key in visited and distance_from_start_node > visited[key]:
+#   continue

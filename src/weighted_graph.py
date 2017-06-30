@@ -1,4 +1,5 @@
 """Graph Data Structure."""
+from priorityq import PriorityQueue
 
 
 class Weighted(dict):
@@ -60,3 +61,25 @@ class Weighted(dict):
         if val1 not in self or val2 not in self:
             raise ValueError("The values are not in the graph.")
         return val2 in self[val1]
+
+    # (('A', 0), 0) -> ('A', 0) -> ('A') -> {'B': 7, 'C': 9}
+    def dijkstra(self, start_node):
+        """Find the shortest path to nodes from starting node."""
+        if not self.has_node(start_node):
+            raise IndexError('Node not in this weighted graph.')
+        current_node = (start_node, 0)
+        visited = {}
+        priorityq = PriorityQueue()
+        priorityq.insert(current_node, 0)
+        while priorityq.size() > 0:
+            current_node = priorityq.pop()
+            next_nodes = self[current_node[0]]
+            for key, value in next_nodes.items():
+                distance_from_start_node = value + current_node[1]
+                priorityq.insert(
+                    (key, distance_from_start_node), distance_from_start_node
+                )
+                if key in visited and distance_from_start_node > visited[key]:
+                    continue
+                visited.update({key: distance_from_start_node})
+        return visited

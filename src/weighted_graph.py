@@ -71,17 +71,28 @@ class Weighted(dict):
         visited = {}
         priorityq = PriorityQueue()
         priorityq.insert(current_node, 0)
+        paths = {}
         while priorityq.size() > 0:
             current_node = priorityq.pop()
             next_nodes = self[current_node[0]]
             for key, value in next_nodes.items():
                 distance_from_start_node = value + current_node[1]
-                priorityq.insert(
-                    (key, distance_from_start_node), distance_from_start_node
-                )
                 if key not in visited or distance_from_start_node < visited[key]:
+                    if key == start_node:
+                        continue
                     visited.update({key: distance_from_start_node})
+                    path = current_node[0] + key
+                    paths[path] = distance_from_start_node
+                    priorityq.insert(
+                        (key, distance_from_start_node), distance_from_start_node
+                    )
+        print(paths)
         return visited
+
+    def bellman_ford(self, start_node):
+        """Find the shortest path using Bellman-Ford."""
+        if not self.has_node(start_node):
+            raise IndexError('Node not in this weighted graph.')
 
 #  if key in visited and distance_from_start_node > visited[key]:
 #   continue

@@ -186,7 +186,7 @@ def dijkstra_alg():
     new_graph.add_node('3')
     new_graph.add_node('4')
     new_graph.add_node('5')
-    new_graph.add_edge('0','1',1)
+    new_graph.add_edge('0', '1', 1)
     new_graph.add_edge('0', '2', 7)
     new_graph.add_edge('1', '3', 9)
     new_graph.add_edge('1', '5', 15)
@@ -202,7 +202,34 @@ def test_new_graph_returns_path_to_nodes(dijkstra_alg):
     assert dijkstra_alg.dijkstra('0') == {'1': 1, '2': 7, '3': 10, '4': 11, '5': 14}
 
 
+def test_new_graph_returns_path_to_other_nodes(graph_with_edges):
+    """Test that the key value pairs are correct."""
+    assert graph_with_edges.dijkstra('A') == {'B': 7, 'C': 9, 'D': 9, 'E': 11, 'F': 15}
+
+
+def test_graph_with_nodes_pointing_at_each_other():
+    """."""
+    from weighted_graph import Weighted
+    new_weighted = Weighted()
+    new_weighted.add_node('A')
+    new_weighted.add_node('B')
+    new_weighted.add_node('C')
+    new_weighted.add_node('D')
+    new_weighted.add_node('E')
+    new_weighted.add_node('F')
+    new_weighted.add_edge('A', 'B', 7)
+    new_weighted.add_edge('B', 'C', 9)
+    new_weighted.add_edge('B', 'E', 4)
+    new_weighted.add_edge('E', 'D', 2)
+    new_weighted.add_edge('D', 'C', 2)
+    new_weighted.add_edge('C', 'F', 6)
+    new_weighted.add_edge('C', 'A', 1)
+    assert new_weighted.dijkstra('A') == {'B': 7, 'E': 11, 'D': 13, 'C': 15, 'F': 21}
+
+
 def test_dijkstra_indext_error_raises(dijkstra_alg):
     """Ensure that index error raises for no node in graph."""
     with pytest.raises(IndexError):
         dijkstra_alg.dijkstra('7')
+
+{'A': {'B': 7, 'C': 9}, 'B': {'D': 2, 'E': 4}, 'C': {'F': 6}}

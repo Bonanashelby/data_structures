@@ -93,6 +93,24 @@ class Weighted(dict):
         """Find the shortest path using Bellman-Ford."""
         if not self.has_node(start_node):
             raise IndexError('Node not in this weighted graph.')
+        nodes_dict = {key: float('Inf') for key in self.nodes()}
+        for _ in range(len(self.nodes()) - 1):
+            for node, value in nodes_dict.items():
+                if node in self:
+                    neighbors = self[node]
+                    for neighbor in neighbors:
+                        if node == start_node:
+                            new_length = neighbors[neighbor]
+                            nodes_dict.update({neighbor: new_length})
+                        elif value == float('Inf'):
+                            continue
+                        # elif value > neighbors[neighbor] + nodes_dict[neighbor]:
+                        else:
+                            nodes_dict[neighbor] = neighbors[neighbor] + value
+
 
 #  if key in visited and distance_from_start_node > visited[key]:
 #   continue
+
+# {'A': {'B': 7, 'C': 9}, 'B': {'D': 2, 'E': 4}, 'C': {'F': 6}}
+# {'A': inf, B': 7, 'C': 9, 'D': 9, 'E': 11, 'F': 15}

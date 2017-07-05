@@ -91,26 +91,44 @@ class Weighted(dict):
 
     def bellman_ford(self, start_node):
         """Find the shortest path using Bellman-Ford."""
+        #  If it doesn't have the node, raise an error.
         if not self.has_node(start_node):
             raise IndexError('Node not in this weighted graph.')
+        #  This is the dictionary of the nodes that we'll be iterating over.
+        #  Each node starts out as infinity
         nodes_dict = {key: float('Inf') for key in self.nodes()}
+        #  Perform the whole iteration N - 1 times.
         for _ in range(len(self.nodes()) - 1):
+            #  Iterate over each node in the nodes_dict dictionary
             for node, value in nodes_dict.items():
-                if node in self:
+                #  If the node is in the graph, then do the following:
+                if node in self:  # I don't remember why this is here, the node will be in the graph
+                    #  Look at the nodes neighbors
                     neighbors = self[node]
+                    #  For each of given nodes neighbors
                     for neighbor in neighbors:
+                        #  If it is equal to the start node
                         if node == start_node:
+                            #  Then assign that nodes weight to the value in the nodes_dict
                             new_length = neighbors[neighbor]
                             nodes_dict.update({neighbor: new_length})
+                        #  Else, if the value isn't the start node and it has a value
+                        #  of infinity, continue to next neighbor since we haven't reached that
+                        #  node yet.
                         elif value == float('Inf'):
                             continue
-                        # elif value > neighbors[neighbor] + nodes_dict[neighbor]:
+                        #  Otherwise, if it's not equal to the start node and it
+                        #  has a weight, then update it the nodes_dict dictionary
                         else:
                             nodes_dict[neighbor] = neighbors[neighbor] + value
+        #  It is doing a breadfirst traversal, so it will not traverse the tree itself.
+        #  It's going to look at whatever node is next in the nodes_dct dictionary, see (1)
+        #  below
+        #  Need to modify this to start from any node.
 
 
 #  if key in visited and distance_from_start_node > visited[key]:
 #   continue
 
 # {'A': {'B': 7, 'C': 9}, 'B': {'D': 2, 'E': 4}, 'C': {'F': 6}}
-# {'A': inf, B': 7, 'C': 9, 'D': 9, 'E': 11, 'F': 15}
+# (1) {'A': inf, B': 7, 'C': 9, 'D': 9, 'E': 11, 'F': 15}

@@ -231,5 +231,3 @@ def test_dijkstra_indext_error_raises(dijkstra_alg):
     """Ensure that index error raises for no node in graph."""
     with pytest.raises(IndexError):
         dijkstra_alg.dijkstra('7')
-
-{'A': {'B': 7, 'C': 9}, 'B': {'D': 2, 'E': 4}, 'C': {'F': 6}}

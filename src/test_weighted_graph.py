@@ -250,3 +250,53 @@ def test_bellman_ford_first_test_one():
     new_weighted.add_edge('D', 'C', 2)
     new_weighted.add_edge('C', 'F', 6)
     new_weighted.add_edge('C', 'A', 1)
+    assert new_weighted.bellman_ford('A') == {'A': 0, 'B': 7, 'E': 11, 'D': 13, 'C': 15, 'F': 21}
+# {'A': {'B': 7, 'C': 9}, 'B': {'D': 2, 'E': 4}, 'C': {'F': 6}}
+
+
+def test_bellman_ford_first_test_two(dijkstra_alg):
+    """Ensure we get same values as dijkstras."""
+    assert dijkstra_alg.bellman_ford('0') == {'0': 0, '1': 1, '2': 7, '3': 10, '4': 11, '5': 14}
+# {'A': {'B': 7, 'C': 9}, 'B': {'D': 2, 'E': 4}, 'C': {'F': 6}}
+
+
+def test_bellman_ford_with_negatives_one():
+    """Ensure bellman works with negatives."""
+    from weighted_graph import Weighted
+    weighted = Weighted()
+    weighted.add_node('S')
+    weighted.add_node('E')
+    weighted.add_node('A')
+    weighted.add_node('D')
+    weighted.add_node('B')
+    weighted.add_node('C')
+    weighted.add_edge('S', 'E', 8)
+    weighted.add_edge('S', 'A', 10)
+    weighted.add_edge('E', 'D', 1)
+    weighted.add_edge('D', 'A', -4)
+    weighted.add_edge('D', 'C', -1)
+    weighted.add_edge('A', 'C', 2)
+    weighted.add_edge('C', 'B', -2)
+    weighted.add_edge('B', 'A', 1)
+    assert weighted.bellman_ford('S') == {'A': 5, 'B': 5, 'C': 7, 'D': 9, 'E': 8, 'S': 0}
+
+
+def test_bellman_with_negatives_two():
+    """Ensure it works with various cases of negatives."""
+    from weighted_graph import Weighted
+    weighted = Weighted()
+    weighted.add_node(0)
+    weighted.add_node(1)
+    weighted.add_node(2)
+    weighted.add_node(3)
+    weighted.add_node(4)
+    weighted.add_node(5)
+    weighted.add_edge(0, 1, 5)
+    weighted.add_edge(0, 2, 3)
+    weighted.add_edge(1, 3, 7)
+    weighted.add_edge(2, 3, -2)
+    weighted.add_edge(3, 0, 8)
+    weighted.add_edge(3, 4, 3)
+    weighted.add_edge(4, 5, 6)
+    weighted.add_edge(0, 5, 4)
+    assert weighted.bellman_ford(0) == {0: 0, 1: 5, 2: 3, 3: 1, 4: 4, 5: 4}

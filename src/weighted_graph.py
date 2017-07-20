@@ -97,8 +97,11 @@ class Weighted(dict):
         #  This is the dictionary of the nodes that we'll be iterating over.
         #  Each node starts out as infinity
         nodes_dict = {key: float('Inf') for key in self.nodes()}
+        nodes_dict[start_node] = 0
+        traversed_edges = []
         #  Perform the whole iteration N - 1 times.
-        for _ in range(len(self.nodes()) - 1):
+        # import pdb; pdb.set_trace()
+        for i in range(len(self.nodes()) - 1):
             #  Iterate over each node in the nodes_dict dictionary
             for node, value in nodes_dict.items():
                 #  If the node is in the graph, then do the following:
@@ -108,7 +111,7 @@ class Weighted(dict):
                     #  For each of given nodes neighbors
                     for neighbor in neighbors:
                         #  If it is equal to the start node
-                        if node == start_node:
+                        if node == start_node and i == 0:
                             #  Then assign that nodes weight to the value in the nodes_dict
                             new_length = neighbors[neighbor]
                             nodes_dict.update({neighbor: new_length})
@@ -120,7 +123,14 @@ class Weighted(dict):
                         #  Otherwise, if it's not equal to the start node and it
                         #  has a weight, then update it the nodes_dict dictionary
                         else:
-                            nodes_dict[neighbor] = neighbors[neighbor] + value
+                            distance = neighbors[neighbor] + value
+                            if (node, neighbor) in traversed_edges and distance < nodes_dict[neighbor]:
+                                return ("Negative cycle detected.")
+                            if distance > nodes_dict[neighbor]:
+                                continue
+                            nodes_dict[neighbor] = distance
+                            traversed_edges.append((node, neighbor))
+        return nodes_dict
         #  It is doing a breadfirst traversal, so it will not traverse the tree itself.
         #  It's going to look at whatever node is next in the nodes_dct dictionary, see (1)
         #  below

@@ -231,3 +231,22 @@ def test_dijkstra_indext_error_raises(dijkstra_alg):
     """Ensure that index error raises for no node in graph."""
     with pytest.raises(IndexError):
         dijkstra_alg.dijkstra('7')
+
+
+def test_bellman_ford_first_test_one():
+    """Ensure we get same values as dijkstras."""
+    from weighted_graph import Weighted
+    new_weighted = Weighted()
+    new_weighted.add_node('A')
+    new_weighted.add_node('B')
+    new_weighted.add_node('C')
+    new_weighted.add_node('D')
+    new_weighted.add_node('E')
+    new_weighted.add_node('F')
+    new_weighted.add_edge('A', 'B', 7)
+    new_weighted.add_edge('B', 'C', 9)
+    new_weighted.add_edge('B', 'E', 4)
+    new_weighted.add_edge('E', 'D', 2)
+    new_weighted.add_edge('D', 'C', 2)
+    new_weighted.add_edge('C', 'F', 6)
+    new_weighted.add_edge('C', 'A', 1)

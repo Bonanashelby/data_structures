@@ -43,9 +43,13 @@ class LinkedList(object):
         self._length -= 1
         return popped.data
 
-    def __len__(self):
+    def size(self):
         """Return the length of the linked list."""
         return self._length
+
+    def __len__(self):
+        """Interact with built-in len() function."""
+        return self.size()
 
     def search(self, val):
         """Search the nodes for the value provided."""
@@ -56,7 +60,7 @@ class LinkedList(object):
             else:
                 return current_node.data
         else:
-            return None
+            return
 
     def remove(self, val):
         """Removenode from anywhere in the linked list with the given value."""
@@ -65,18 +69,20 @@ class LinkedList(object):
                 'That value is not in this particular linked list.')
         if self.head.data == val:
             self.pop()
-            return None
+            return
         current_node = self.head
+        previous_node = self.head
         while current_node is not None:
-            if current_node.next_node.data != val:
+            if current_node.data != val:
+                previous_node = current_node
                 current_node = current_node.next_node
+                continue
             else:
-                removed_node = current_node.next_node
-                current_node.next_node = current_node.next_node.next_node
+                previous_node.next_node = current_node.next_node
                 self._length -= 1
-                if removed_node.next_node is not None:
-                    removed_node.next_node = None
                 break
+        else:
+            raise ValueError('Value not found.')
 
     def display(self):
         """Present a visual representation of the linked list."""
@@ -84,7 +90,13 @@ class LinkedList(object):
         display_str = ' '
         while node is not None:
                 display_str += ' '
+                display_str += '\''
                 display_str += str(node.data)
+                display_str += '\''
                 node = node.next_node
         display_str = ', '.join(display_str.split())
         return '{}{}{}'.format('(', display_str, ')')
+
+    def __str__(self):
+        """Interact with built-in print function."""
+        return self.display()

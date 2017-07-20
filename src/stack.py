@@ -12,13 +12,16 @@ class Stack(object):
         self._new_linked_list = LinkedList(data)
 
     def push(self, val):
-        """Push function for stack."""
-        return self._new_linked_list.push(val)
+        """Add a value to the top of the stack."""
+        self._new_linked_list.push(val)
 
     def pop(self):
-        """Pop function for stack."""
+        """Remove and return the top of the stack."""
+        if len(self) == 0:
+            raise IndexError(
+                'Cannot pop from empty stack.')
         return self._new_linked_list.pop()
 
     def __len__(self):
-        """Length function for stack."""
-        return len(self._new_linked_list)
+        """Return the number of items in the stack."""
+        return self._new_linked_list.size()

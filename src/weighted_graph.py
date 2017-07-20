@@ -1,4 +1,5 @@
 """Graph Data Structure."""
+from priorityq import PriorityQueue
 
 
 class Weighted(dict):
@@ -22,7 +23,6 @@ class Weighted(dict):
         if val in self.keys():
             raise ValueError("This value is already in your graph.")
         self[val] = {}
-        # that they can only add a dictionary- no vals in dict that is anything but a dict
 
     def add_edge(self, val1, val2, weight):
         """Add a new edge to the graph."""
@@ -60,3 +60,51 @@ class Weighted(dict):
         if val1 not in self or val2 not in self:
             raise ValueError("The values are not in the graph.")
         return val2 in self[val1]
+
+    def dijkstra(self, start_node):
+        """Find the shortest path to nodes from starting node."""
+        if not self.has_node(start_node):
+            raise IndexError('Node not in this weighted graph.')
+        current_node = (start_node, 0)
+        visited = {}
+        priorityq = PriorityQueue()
+        priorityq.insert(current_node, 0)
+        paths = {}
+        while priorityq.size() > 0:
+            current_node = priorityq.pop()
+            next_nodes = self[current_node[0]]
+            for key, value in next_nodes.items():
+                distance_from_start_node = value + current_node[1]
+                if key not in visited or distance_from_start_node < visited[key]:
+                    if key == start_node:
+                        continue
+                    visited.update({key: distance_from_start_node})
+                    path = current_node[0] + key
+                    paths[path] = distance_from_start_node
+                    priorityq.insert(
+                        (key, distance_from_start_node), distance_from_start_node
+                    )
+        print(paths)
+        return visited
+
+    def bellman_ford(self, start_node):
+        """Find the shortest path using Bellman-Ford."""
+        if not self.has_node(start_node):
+            raise IndexError('Node not in this weighted graph.')
+        nodes_dict = {key: float('Inf') for key in self.nodes()}
+        nodes_dict[start_node] = 0
+        for i in range(len(self.nodes()) - 1):
+            for node, value in nodes_dict.items():
+                neighbors = self[node]
+                for neighbor in neighbors:
+                    if node == start_node and i == 0:
+                        new_length = neighbors[neighbor]
+                        nodes_dict.update({neighbor: new_length})
+                    elif value == float('Inf'):
+                        continue
+                    else:
+                        distance = neighbors[neighbor] + value
+                        if distance > nodes_dict[neighbor]:
+                            continue
+                        nodes_dict[neighbor] = distance
+        return nodes_dict

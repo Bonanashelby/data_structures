@@ -1,0 +1,31 @@
+[run]
+source = 
+    src/weighted_graph.py
+omit = 
+    src/priorityq.py 
+    src/weighted_traversal.py
+    src/deque.py
+    src/que_.py
+    src/stack.py
+    src/binheap.py
+    src/graph_1.py
+    src/graph_2.py
+    src/dll.py
+    src/linked_list.py
+    src/reverse_linked_list.py
+    src/test_dll.py
+    src/test_binheap.py
+    src/test_deque.py
+    src/test_dijkstra.py
+    src/test_graph.py
+    src/test_graph_2.py
+    src/test_linked_list.py
+    src/test_priority_que.py
+    src/test_que_.py
+    src/test_reverse_linked_list.py
+    src/test_stack.py
+    src/test_weighted_graph.py
+    src/test_weighted_traversal.py
+
+[report]
+show_missing = True

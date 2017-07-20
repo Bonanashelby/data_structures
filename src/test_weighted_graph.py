@@ -36,13 +36,11 @@ def graph_with_edges():
     new_graph.add_node('D')
     new_graph.add_node('E')
     new_graph.add_node('F')
-    new_graph.add_edge('A', 'B')
-    new_graph.add_edge('A', 'C')
-    new_graph.add_edge('B', 'D')
-    new_graph.add_edge('B', 'E')
-    new_graph.add_edge('C', 'B')
-    new_graph.add_edge('F', 'A')
-    new_graph.add_edge('C', 'F')
+    new_graph.add_edge('A', 'B', 7)
+    new_graph.add_edge('A', 'C', 9)
+    new_graph.add_edge('B', 'D', 2)
+    new_graph.add_edge('B', 'E', 4)
+    new_graph.add_edge('C', 'F', 6)
     return new_graph
 
 
@@ -157,3 +155,148 @@ def test_adjacent_unpresent(graph_with_edges):
     """Ensure we get an error."""
     with pytest.raises(ValueError):
         graph_with_edges.adjacent('Captain Picard', 'Star Wars')
+
+
+def test_add_node_value_error_val_exists(graph_no_edges):
+    """Ensure a value is not added twice."""
+    with pytest.raises(ValueError):
+        graph_no_edges.add_node('BB')
+
+
+def test_del_edges_has_no_edges_to_delete(graph_with_edges):
+    """Ensure there are no edges to delete."""
+    with pytest.raises(KeyError):
+        graph_with_edges.del_edges('F', 'G')
+
+
+def test_neighbors_value_error_not_in_graph(graph_with_edges):
+        """Ensure the value error raises if no neighbors."""
+        with pytest.raises(ValueError):
+            graph_with_edges.neighbors('G')
+
+
+@pytest.fixture
+def dijkstra_alg():
+    """Test dijkstra method."""
+    from weighted_graph import Weighted
+    new_graph = Weighted()
+    new_graph.add_node('0')
+    new_graph.add_node('1')
+    new_graph.add_node('2')
+    new_graph.add_node('3')
+    new_graph.add_node('4')
+    new_graph.add_node('5')
+    new_graph.add_edge('0', '1', 1)
+    new_graph.add_edge('0', '2', 7)
+    new_graph.add_edge('1', '3', 9)
+    new_graph.add_edge('1', '5', 15)
+    new_graph.add_edge('2', '4', 4)
+    new_graph.add_edge('3', '5', 5)
+    new_graph.add_edge('3', '4', 10)
+    new_graph.add_edge('4', '5', 3)
+    return new_graph
+
+
+def test_new_graph_returns_path_to_nodes(dijkstra_alg):
+    """Test that the key value pairs are correct."""
+    assert dijkstra_alg.dijkstra('0') == {'1': 1, '2': 7, '3': 10, '4': 11, '5': 14}
+
+
+def test_new_graph_returns_path_to_other_nodes(graph_with_edges):
+    """Test that the key value pairs are correct."""
+    assert graph_with_edges.dijkstra('A') == {'B': 7, 'C': 9, 'D': 9, 'E': 11, 'F': 15}
+
+
+def test_graph_with_nodes_pointing_at_each_other():
+    """."""
+    from weighted_graph import Weighted
+    new_weighted = Weighted()
+    new_weighted.add_node('A')
+    new_weighted.add_node('B')
+    new_weighted.add_node('C')
+    new_weighted.add_node('D')
+    new_weighted.add_node('E')
+    new_weighted.add_node('F')
+    new_weighted.add_edge('A', 'B', 7)
+    new_weighted.add_edge('B', 'C', 9)
+    new_weighted.add_edge('B', 'E', 4)
+    new_weighted.add_edge('E', 'D', 2)
+    new_weighted.add_edge('D', 'C', 2)
+    new_weighted.add_edge('C', 'F', 6)
+    new_weighted.add_edge('C', 'A', 1)
+    assert new_weighted.dijkstra('A') == {'B': 7, 'E': 11, 'D': 13, 'C': 15, 'F': 21}
+
+
+def test_dijkstra_indext_error_raises(dijkstra_alg):
+    """Ensure that index error raises for no node in graph."""
+    with pytest.raises(IndexError):
+        dijkstra_alg.dijkstra('7')
+
+
+def test_bellman_ford_first_test_one():
+    """Ensure we get same values as dijkstras."""
+    from weighted_graph import Weighted
+    new_weighted = Weighted()
+    new_weighted.add_node('A')
+    new_weighted.add_node('B')
+    new_weighted.add_node('C')
+    new_weighted.add_node('D')
+    new_weighted.add_node('E')
+    new_weighted.add_node('F')
+    new_weighted.add_edge('A', 'B', 7)
+    new_weighted.add_edge('B', 'C', 9)
+    new_weighted.add_edge('B', 'E', 4)
+    new_weighted.add_edge('E', 'D', 2)
+    new_weighted.add_edge('D', 'C', 2)
+    new_weighted.add_edge('C', 'F', 6)
+    new_weighted.add_edge('C', 'A', 1)
+    assert new_weighted.bellman_ford('A') == {'A': 0, 'B': 7, 'E': 11, 'D': 13, 'C': 15, 'F': 21}
+# {'A': {'B': 7, 'C': 9}, 'B': {'D': 2, 'E': 4}, 'C': {'F': 6}}
+
+
+def test_bellman_ford_first_test_two(dijkstra_alg):
+    """Ensure we get same values as dijkstras."""
+    assert dijkstra_alg.bellman_ford('0') == {'0': 0, '1': 1, '2': 7, '3': 10, '4': 11, '5': 14}
+# {'A': {'B': 7, 'C': 9}, 'B': {'D': 2, 'E': 4}, 'C': {'F': 6}}
+
+
+def test_bellman_ford_with_negatives_one():
+    """Ensure bellman works with negatives."""
+    from weighted_graph import Weighted
+    weighted = Weighted()
+    weighted.add_node('S')
+    weighted.add_node('E')
+    weighted.add_node('A')
+    weighted.add_node('D')
+    weighted.add_node('B')
+    weighted.add_node('C')
+    weighted.add_edge('S', 'E', 8)
+    weighted.add_edge('S', 'A', 10)
+    weighted.add_edge('E', 'D', 1)
+    weighted.add_edge('D', 'A', -4)
+    weighted.add_edge('D', 'C', -1)
+    weighted.add_edge('A', 'C', 2)
+    weighted.add_edge('C', 'B', -2)
+    weighted.add_edge('B', 'A', 1)
+    assert weighted.bellman_ford('S') == {'A': 5, 'B': 5, 'C': 7, 'D': 9, 'E': 8, 'S': 0}
+
+
+def test_bellman_with_negatives_two():
+    """Ensure it works with various cases of negatives."""
+    from weighted_graph import Weighted
+    weighted = Weighted()
+    weighted.add_node(0)
+    weighted.add_node(1)
+    weighted.add_node(2)
+    weighted.add_node(3)
+    weighted.add_node(4)
+    weighted.add_node(5)
+    weighted.add_edge(0, 1, 5)
+    weighted.add_edge(0, 2, 3)
+    weighted.add_edge(1, 3, 7)
+    weighted.add_edge(2, 3, -2)
+    weighted.add_edge(3, 0, 8)
+    weighted.add_edge(3, 4, 3)
+    weighted.add_edge(4, 5, 6)
+    weighted.add_edge(0, 5, 4)
+    assert weighted.bellman_ford(0) == {0: 0, 1: 5, 2: 3, 3: 1, 4: 4, 5: 4}
